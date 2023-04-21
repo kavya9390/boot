@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Book Tickets</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Ticket Booking</h3>
+    <hr>
+
+    <p class="h4 mb-4">Book a Ticket</p>
+
+    <form action="#" th:action="@{/customers/saveTicket}"
+          th:object="${ticket}" method="POST">
+
+        <input type="hidden" th:field="*{id}" />
+
+<!--        <input type="hidden" th:field="*{customer.id}" th:value="${ticket.customer.id}" />-->
+
+        <input type="text" th:field="*{compartmentName}"
+               class="form-control mb-4 col-4" placeholder="Name">
+
+        <input type="text" th:field="*{amount}"
+               class="form-control mb-4 col-4" placeholder="Amount">
+
+        <button type="submit" class="btn btn-info col-2">Confirm</button>
+    </form>
+    <hr>
+    <a th:href="@{/customers/list}">Back to Customers List</a>
+</div>
+</body>
+</html>
