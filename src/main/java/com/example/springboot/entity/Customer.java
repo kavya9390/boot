@@ -1,7 +1,9 @@
 package com.example.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Customer {
     @Column(name = "customer_email")
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
@@ -66,7 +69,6 @@ public class Customer {
             tickets = new ArrayList<>();
         tickets.add(ticket);
     }
-
     @Override
     public String toString() {
         return "Customer{" +

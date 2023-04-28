@@ -3,7 +3,6 @@ package com.example.springboot.service;
 import com.example.springboot.entity.Ticket;
 import com.example.springboot.repository.CustomerRepository;
 import com.example.springboot.entity.Customer;
-import com.example.springboot.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +11,9 @@ import java.util.Optional;
 
 @Service
 public class ServiceImplementation implements CustomerService{
-    private CustomerRepository customerRepository;
-
-    public ServiceImplementation(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
 
     @Autowired
-    private TicketRepository ticketRepository;
+    private CustomerRepository customerRepository;
 
     @Override
     public List<Customer> findAll() {
@@ -41,15 +35,16 @@ public class ServiceImplementation implements CustomerService{
             throw new RuntimeException("Customer not found - " + id);
         return customer;
     }
-
     @Override
     public void deleteCustomer(int id) {
         customerRepository.deleteById(id);
     }
 
-    public void createTicket(int customerId, Ticket ticket) {
-        Customer customer = getCustomer(customerId);
-        ticket.setCustomer(customer);
-        ticketRepository.save(ticket);
+    @Override
+    public List<Ticket> findTicketsByCustomerId(int id) {
+        Optional<Customer> tempCustomer = customerRepository.findById(id);
+        if(!tempCustomer.isPresent())
+            throw  new RuntimeException("Customer does not exist - " + id);
+        return tempCustomer.get().getTickets();
     }
 }

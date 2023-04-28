@@ -11,19 +11,19 @@ public class Ticket {
     @Column(name="id")
     private int id;
 
-    @Column(name = "compartment_name")
-    private String compartmentName;
+    @Column(name = "seat_name")
+    private String seatName;
 
-    @Column(name = "amount")
-    private double amount;
+    @Column(name = "duration")
+    private String duration;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Ticket(String compartmentName, double amount) {
-        this.compartmentName = compartmentName;
-        this.amount = amount;
+    public Ticket(String seatName, String duration) {
+        this.seatName = seatName;
+        this.duration = duration;
     }
 
     public Ticket(){}
@@ -36,20 +36,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCompartmentName() {
-        return compartmentName;
+    public String getSeatName() {
+        return seatName;
     }
 
-    public void setCompartmentName(String compartmentName) {
-        this.compartmentName = compartmentName;
+    public void setSeatName(String seatName) {
+        this.seatName = seatName;
     }
 
-    public double getAmount() {
-        return amount;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public Customer getCustomer() {
@@ -64,8 +64,9 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", compartmentName='" + compartmentName + '\'' +
-                ", amount=" + amount +
+                ", seatName='" + seatName + '\'' +
+                ", duration='" + duration + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 }

@@ -14,5 +14,5 @@ public interface CustomerService {
 
     public void deleteCustomer(int id);
 
-    public void createTicket(int id, Ticket ticket);
+    public List<Ticket> findTicketsByCustomerId(int id);
 }

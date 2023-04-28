@@ -19,18 +19,16 @@
 
     <p class="h4 mb-4">Book a Ticket</p>
 
-    <form action="#" th:action="@{/customers/saveTicket}"
+    <form action="#" th:action="@{/customers/saveTicket/{customerId}(customerId=${customerId})}"
           th:object="${ticket}" method="POST">
 
         <input type="hidden" th:field="*{id}" />
 
-<!--        <input type="hidden" th:field="*{customer.id}" th:value="${ticket.customer.id}" />-->
-
-        <input type="text" th:field="*{compartmentName}"
+        <input type="text" th:field="*{seatName}"
                class="form-control mb-4 col-4" placeholder="Name">
 
-        <input type="text" th:field="*{amount}"
-               class="form-control mb-4 col-4" placeholder="Amount">
+        <input type="text" th:field="*{duration}"
+               class="form-control mb-4 col-4" placeholder="Duration">
 
         <button type="submit" class="btn btn-info col-2">Confirm</button>
     </form>
